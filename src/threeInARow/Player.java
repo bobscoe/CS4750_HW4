@@ -3,6 +3,7 @@ package threeInARow;
 public abstract class Player {
 	protected Player opponent;
 	protected char mark;
+	public boolean isMax=false;
 	protected Player(Player opponent,char mark){
 		this.opponent = opponent;
 		this.mark = mark;
@@ -16,4 +17,5 @@ public abstract class Player {
 	public char getMark(){
 		return mark;
 	}
+	
 }

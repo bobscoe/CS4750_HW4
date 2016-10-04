@@ -18,12 +18,16 @@ public class Game {
 	
 	public void start(){
 		for(int i=0;i<10;i++){
+			player1.isMax = true;
+			player2.isMax = false;
 			Move move = player1.getMove(gameBoard);
 			gameBoard.markMove(player1,move);
 			if(gameBoard.isComplete(player1)){
 				System.out.println("Player 1 wins");
 				break;
 			}
+			player1.isMax = false;
+			player2.isMax = true;
 			move = player2.getMove(gameBoard);
 			gameBoard.markMove(player2,move);
 			if(gameBoard.isComplete(player2)){
