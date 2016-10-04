@@ -17,7 +17,19 @@ public class Game {
 	}
 	
 	public void start(){
-		
+		for(int i=0;i<10;i++){
+			Move move = player1.getMove(gameBoard);
+			gameBoard.markMove(player1,move);
+			if(gameBoard.isComplete(player1)){
+				System.out.println("Player 1 wins");
+				break;
+			}
+			move = player2.getMove(gameBoard);
+			gameBoard.markMove(player2,move);
+			if(gameBoard.isComplete(player2)){
+				System.out.println("Player 2 wins");
+			}
+		}
 	}
 	
 	public boolean isCompleted(){
