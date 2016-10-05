@@ -6,7 +6,8 @@ public class AdvancedPlayer extends Player {
 	
 	protected AdvancedPlayer(Player opponent,char mark) {
 		super(opponent,mark);
-		opponent.setOpponent(this);
+		if(opponent!=null)
+			opponent.setOpponent(this);
 	}
 
 	public Move getMove(Board board) {

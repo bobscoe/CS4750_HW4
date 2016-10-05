@@ -32,6 +32,7 @@ public class Game {
 			gameBoard.markMove(player2,move);
 			if(gameBoard.isComplete(player2)){
 				System.out.println("Player 2 wins");
+				break;
 			}
 		}
 	}
