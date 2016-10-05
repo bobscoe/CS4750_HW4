@@ -149,4 +149,101 @@ public class Node {
 		else
 			heuristicValue = twoInARowCount(player.opponent) - twoInARowCount(player);
 	}
+	
+	public boolean isTerminalNode(Player player){
+		char mark = player.getMark();
+		String [] winning_arrangements = {
+				new String(new char[]{mark,mark,mark})
+		};
+		if (hasArrangementInRows(winning_arrangements))
+			return true;
+		if (hasArrangementInColumns(winning_arrangements))
+			return true;
+		return hasArrangementInDiagonals(winning_arrangements);
+	}
+	
+	private boolean hasArrangementInRows(String[] arrangements) {
+		for (int i = 0; i < gridSize; i++) {
+			char[] rowState = new char[gridSize];
+			for (int j = 0; j < gridSize; j++) {
+				rowState[j] = state[i][j];
+			}
+			String row = new String(rowState);
+			if (hasAnySuccessfulArrangement(row, arrangements))
+				return true;
+		}
+		return false;
+	}
+
+	private boolean hasArrangementInColumns(String[] arrangements) {
+		for (int i = 0; i < gridSize; i++) {
+			char[] rowState = new char[gridSize];
+			for (int j = 0; j < gridSize; j++) {
+				rowState[j] = state[j][i];
+			}
+			String row = new String(rowState);
+			if (hasAnySuccessfulArrangement(row, arrangements))
+				return true;
+		}
+		return false;
+	}
+
+	private boolean hasArrangementInDiagonals(String[] arrangements) {
+		char[] rowState = new char[gridSize];
+		//diagonal (0,0),(1,1),(2,2),(3,3) check 
+		for (int i = 0, j = 0; i < gridSize && j < gridSize; i++, j++) {
+			rowState[i] = state[i][j];
+		}
+		String row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			return true;
+
+		//diagonal (3,0),(2,1),(1,2),(0,3) check 
+		for (int i = gridSize - 1, j = 0; i >= 0 && j < gridSize; i--, j++) {
+			rowState[j] = state[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			return true;
+		
+		rowState = new char[gridSize - 1];
+		//diagonal (1,0),(2,1),(3,2) check 
+		for (int i = 1, j = 0; i < gridSize && j < gridSize; i++, j++) {
+			rowState[j] = state[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			return true;
+		//diagonal (0,1),(1,2),(2,3) check
+		for (int i = 0, j = 1; i < gridSize && j < gridSize; i++, j++) {
+			rowState[i] = state[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			return true;
+		
+		//diagonal (2,0),(1,1),(0,2) check
+		for (int i = gridSize - 2, j = 0; i >= 0 && j < gridSize; i--, j++) {
+			rowState[j] = state[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			return true;
+
+		//diagonal (3,1),(2,2),(1,3) check
+		for (int i = gridSize - 1, j = 1; i >= 0 && j < gridSize; i--, j++) {
+			rowState[j - 1] = state[i][j];
+		}
+		row = new String(rowState);
+		return hasAnySuccessfulArrangement(row, arrangements);
+	}
+
+	private boolean hasAnySuccessfulArrangement(String boardArrangement, String[] arrangements) {
+		for (int i = 0; i < arrangements.length; i++) {
+			if (boardArrangement.contains(arrangements[i]))
+				return true;
+		}
+		return false;
+	}
+
 }

@@ -3,6 +3,8 @@ package threeInARow;
 public class MinMaxSearch {
 	private final int MOVES_LOOK_AHEAD;
 	private Player player;
+	private final int WIN_VALUE = 100;
+	private final int LOSS_VALUE = -100;
 	public MinMaxSearch(Player player,int movesToLookAhead) {
 		this.player = player;
 		MOVES_LOOK_AHEAD = movesToLookAhead;
@@ -38,6 +40,13 @@ public class MinMaxSearch {
 					newState[i][j] = player.mark;
 					Node n = new Node(node,newState,new Move(i,j),player);
 					node.addChild(n);
+					if(n.isTerminalNode(player))
+					{
+						maxHeuristicValue = WIN_VALUE;
+						n.setHeuristicValue(WIN_VALUE);
+						n.getParent().setHeuristicValue(WIN_VALUE);
+						continue;
+					}
 					generateMinNodes(n,player.opponent,depth+1);
 					if(n.getHeuristicValue() > maxHeuristicValue){
 						maxHeuristicValue = n.getHeuristicValue();
@@ -60,6 +69,13 @@ public class MinMaxSearch {
 					newState[i][j] = player.mark;
 					Node n = new Node(node,newState,new Move(i,j),player);
 					node.addChild(n);
+					if(n.isTerminalNode(player))
+					{
+						minHeuristicValue = LOSS_VALUE;
+						n.setHeuristicValue(LOSS_VALUE);
+						n.getParent().setHeuristicValue(LOSS_VALUE);
+						continue;
+					}
 					generateMaxNodes(n,player.opponent,depth+1);
 					if(n.getHeuristicValue() < minHeuristicValue){
 						minHeuristicValue = n.getHeuristicValue();
