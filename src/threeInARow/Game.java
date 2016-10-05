@@ -17,7 +17,8 @@ public class Game {
 	}
 	
 	public void start(){
-		for(int i=0;i<10;i++){
+		while(!gameBoard.isDraw()){
+			try{
 			player1.isMax = true;
 			player2.isMax = false;
 			Move move = player1.getMove(gameBoard);
@@ -33,6 +34,10 @@ public class Game {
 			if(gameBoard.isComplete(player2)){
 				System.out.println("Player 2 wins");
 				break;
+			}
+			}
+			catch(IllegalOperationException ex){
+				System.out.println(ex.getMessage());
 			}
 		}
 	}

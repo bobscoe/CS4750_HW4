@@ -260,10 +260,20 @@ public class Board {
 		return 4;
 	}
 
-	public void markMove(Player player,Move move){
+	public void markMove(Player player,Move move) throws IllegalOperationException{
+		if(board[move.Row][move.Column] != '-')
+			throw new IllegalOperationException("You can not override other palyers marks");
 		board[move.Row][move.Column] = player.getMark();
 	}
 
+	public boolean isDraw(){
+		for(int i=0;i<getHeight();i++)
+			for(int j=0;j<getWidth();j++)
+				if(board[i][j] == '-')
+					return false;
+		return true;
+	}			
+	
 	public boolean isComplete(Player player) {
 		char mark = player.getMark();
 		String [] winning_arrangements = {
