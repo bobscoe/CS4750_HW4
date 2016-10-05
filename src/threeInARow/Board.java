@@ -262,7 +262,7 @@ public class Board {
 
 	public void markMove(Player player,Move move) throws IllegalOperationException{
 		if(board[move.Row][move.Column] != '-')
-			throw new IllegalOperationException("You can not override other palyers marks");
+			throw new IllegalOperationException("You can not override other palyer's mark");
 		board[move.Row][move.Column] = player.getMark();
 	}
 
