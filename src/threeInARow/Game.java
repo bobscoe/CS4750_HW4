@@ -62,7 +62,5 @@ public class Game {
 		Game game = new Game(player1,player2);
 		game.start();
 	}
-	
-	
 
 }

@@ -32,8 +32,60 @@ public class Board {
 		return null;
 	}
 	
-	private Move getWinningMoveDiagonals(Player player, String[] successful_arrangements) {
-		// TODO Auto-generated method stub
+	private Move getWinningMoveDiagonals(Player player, String[] arrangements) {
+		char[] rowState = new char[getHeight()];
+		for (int i = 0, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
+			rowState[i] = board[i][j];
+		}
+		String row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int index = row.indexOf(arrangements[i]);
+					int offset = arrangements[i].indexOf('-');
+					return new Move(index+offset,index+offset);
+				}
+			}
+
+		for (int i = getHeight() - 1, j = 0; i >= 0 && j < getWidth(); i--, j++) {
+			rowState[j] = board[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+//			for(int i=0;i<arrangements.length;i++){
+//				if(row.contains(arrangements[i])){
+//					int index = row.indexOf(arrangements[i]);
+//					int offset = arrangements[i].indexOf('-');
+//					return new Move(getHeight() - 1 - offset,index+offset);
+//				}
+//			}
+		rowState = new char[getHeight() - 1];
+		for (int i = 1, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
+			rowState[j] = board[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+//			return true;
+
+		for (int i = 0, j = 1; i < getHeight() && j < getWidth(); i++, j++) {
+			rowState[i] = board[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+//			return true;
+
+		for (int i = getHeight() - 2, j = 0; i >= 0 && j < getWidth(); i--, j++) {
+			rowState[j] = board[i][j];
+		}
+		row = new String(rowState);
+		if (hasAnySuccessfulArrangement(row, arrangements))
+//			return true;
+
+		for (int i = getHeight() - 1, j = 1; i >= 0 && j < getWidth(); i--, j++) {
+			rowState[j - 1] = board[i][j];
+		}
+		row = new String(rowState);
+//		return hasAnySuccessfulArrangement(row, arrangements);
 		return null;
 	}
 
