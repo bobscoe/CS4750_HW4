@@ -23,14 +23,17 @@ public class Game {
 			player2.isMax = false;
 			Move move = player1.getMove(gameBoard);
 			gameBoard.markMove(player1,move);
+			gameBoard.printState();
 			if(gameBoard.isComplete(player1)){
 				System.out.println("Player 1 wins");
 				break;
 			}
+			
 			player1.isMax = false;
 			player2.isMax = true;
 			move = player2.getMove(gameBoard);
 			gameBoard.markMove(player2,move);
+			gameBoard.printState();
 			if(gameBoard.isComplete(player2)){
 				System.out.println("Player 2 wins");
 				break;

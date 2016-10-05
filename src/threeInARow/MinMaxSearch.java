@@ -32,7 +32,7 @@ public class MinMaxSearch {
 		}
 			
 		char [][]state = node.getState();
-		int maxHeuristicValue =-100;
+		int maxHeuristicValue =-1000;
 		for(int i =0;i<4;i++)
 			for(int j =0;j<4;j++)
 				if(state[i][j] == '-'){

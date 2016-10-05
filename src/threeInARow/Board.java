@@ -15,6 +15,16 @@ public class Board {
 				this.board[i][j] = '-';
 	}
 	
+	public void printState(){
+		System.out.println("Here is the current board status");
+		for (int i = 0; i < getHeight(); i++) {
+			for (int j = 0; j < getWidth(); j++) {
+				System.out.print(board[i][j]+" ");
+			}
+			System.out.println("");
+		}
+	}
+	
 	public Move getWinningMove(Player player){
 		char mark = player.getMark();
 		Move move = null;

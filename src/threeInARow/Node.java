@@ -7,7 +7,7 @@ public class Node {
 	private Move move;
 	private Player player;
 	private Node parent;
-	private int heuristicValue;
+	private int heuristicValue= -1000;
 	private int gridSize = 4;
 	private ArrayList<Node> children = new ArrayList<Node>();
 	public Node(Node parent,char[][] state, Move move, Player player){
