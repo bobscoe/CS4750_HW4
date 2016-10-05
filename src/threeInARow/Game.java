@@ -38,6 +38,7 @@ public class Game {
 			}
 			catch(IllegalOperationException ex){
 				System.out.println(ex.getMessage());
+				break;
 			}
 		}
 	}
