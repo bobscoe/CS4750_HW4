@@ -34,6 +34,8 @@ public class Board {
 	
 	private Move getWinningMoveDiagonals(Player player, String[] arrangements) {
 		char[] rowState = new char[getHeight()];
+		
+		//diagonal (0,0),(1,1),(2,2),(3,3) check 
 		for (int i = 0, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[i] = board[i][j];
 		}
@@ -47,45 +49,72 @@ public class Board {
 				}
 			}
 
+		//diagonal (3,0),(2,1),(1,2),(0,3) check 
 		for (int i = getHeight() - 1, j = 0; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
-//			for(int i=0;i<arrangements.length;i++){
-//				if(row.contains(arrangements[i])){
-//					int index = row.indexOf(arrangements[i]);
-//					int offset = arrangements[i].indexOf('-');
-//					return new Move(getHeight() - 1 - offset,index+offset);
-//				}
-//			}
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int index = row.indexOf(arrangements[i]);
+					int offset = arrangements[i].indexOf('-');
+					return new Move(getHeight() - 1 - (index+offset),index+offset);
+				}
+			}
+		
 		rowState = new char[getHeight() - 1];
+		//diagonal (1,0),(2,1),(3,2) check 
 		for (int i = 1, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[j] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
-//			return true;
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int offset = arrangements[i].indexOf('-');
+					return new Move(1 + offset,offset);
+				}
+			}
 
+		//diagonal (0,1),(1,2),(2,3) check
 		for (int i = 0, j = 1; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[i] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
-//			return true;
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int offset = arrangements[i].indexOf('-');
+					return new Move(offset,1 + offset);
+				}
+			}
 
+		//diagonal (2,0),(1,1),(0,2) check
 		for (int i = getHeight() - 2, j = 0; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
-//			return true;
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int offset = arrangements[i].indexOf('-');
+					return new Move(getHeight()-2-offset, offset);
+				}
+			}
 
+		//diagonal (3,1),(2,2),(1,3) check
 		for (int i = getHeight() - 1, j = 1; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j - 1] = board[i][j];
 		}
 		row = new String(rowState);
-//		return hasAnySuccessfulArrangement(row, arrangements);
+		if(hasAnySuccessfulArrangement(row, arrangements))
+			for(int i=0;i<arrangements.length;i++){
+				if(row.contains(arrangements[i])){
+					int offset = arrangements[i].indexOf('-');
+					return new Move(getHeight()-1-offset, 1+offset);
+				}
+			}
 		return null;
 	}
 
@@ -167,6 +196,7 @@ public class Board {
 
 	private boolean hasArrangementInDiagonals(String[] arrangements) {
 		char[] rowState = new char[getHeight()];
+		//diagonal (0,0),(1,1),(2,2),(3,3) check 
 		for (int i = 0, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[i] = board[i][j];
 		}
@@ -174,27 +204,31 @@ public class Board {
 		if (hasAnySuccessfulArrangement(row, arrangements))
 			return true;
 
+		//diagonal (3,0),(2,1),(1,2),(0,3) check 
 		for (int i = getHeight() - 1, j = 0; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
 			return true;
+		
 		rowState = new char[getHeight() - 1];
+		//diagonal (1,0),(2,1),(3,2) check 
 		for (int i = 1, j = 0; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[j] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
 			return true;
-
+		//diagonal (0,1),(1,2),(2,3) check
 		for (int i = 0, j = 1; i < getHeight() && j < getWidth(); i++, j++) {
 			rowState[i] = board[i][j];
 		}
 		row = new String(rowState);
 		if (hasAnySuccessfulArrangement(row, arrangements))
 			return true;
-
+		
+		//diagonal (2,0),(1,1),(0,2) check
 		for (int i = getHeight() - 2, j = 0; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j] = board[i][j];
 		}
@@ -202,6 +236,7 @@ public class Board {
 		if (hasAnySuccessfulArrangement(row, arrangements))
 			return true;
 
+		//diagonal (3,1),(2,2),(1,3) check
 		for (int i = getHeight() - 1, j = 1; i >= 0 && j < getWidth(); i--, j++) {
 			rowState[j - 1] = board[i][j];
 		}
