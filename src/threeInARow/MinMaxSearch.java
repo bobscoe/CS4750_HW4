@@ -1,5 +1,7 @@
 package threeInARow;
 
+import java.util.ArrayList;
+
 public class MinMaxSearch {
 	private final int MOVES_LOOK_AHEAD;
 	private Player player;
@@ -12,10 +14,15 @@ public class MinMaxSearch {
 
 	public Move getOptimalMove(Board board) {
 		Node root = createMinMaxTree(board);
+		ArrayList<Node> possibleMoves = new ArrayList<Node>();
 		for(int i=0;i<root.getChildren().size();i++){
 			Node child = root.getChildren().get(i);
 			if(root.getHeuristicValue() == child.getHeuristicValue())
-				return child.getMove();
+				possibleMoves.add(child);
+		}
+		if(possibleMoves.size()>0){
+			int random = (int) (Math.random()*possibleMoves.size()-1);
+			return possibleMoves.get(random).getMove();
 		}
 		return null;
 	}
