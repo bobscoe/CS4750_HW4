@@ -7,6 +7,8 @@ public class MinMaxSearch {
 	private Player player;
 	private final int WIN_VALUE = 100;
 	private final int LOSS_VALUE = -100;
+	private int numberOfNodesGenerated = 0;
+	
 	public MinMaxSearch(Player player,int movesToLookAhead) {
 		this.player = player;
 		MOVES_LOOK_AHEAD = movesToLookAhead;
@@ -32,6 +34,14 @@ public class MinMaxSearch {
 		return root;
 	}
 	
+	public int getNumberOfNodesGenerated(){
+		return numberOfNodesGenerated;
+	}
+	
+	public void resetNumberOfNodesGenerated(){
+		 numberOfNodesGenerated = 0;
+	}
+	
 	private void generateMaxNodes(Node node,Player player,int depth){
 		if(depth ==  MOVES_LOOK_AHEAD){
 			node.calculateHeuristicValue();
@@ -46,6 +56,7 @@ public class MinMaxSearch {
 					char [][] newState = deepCopy(state);
 					newState[i][j] = player.mark;
 					Node n = new Node(node,newState,new Move(i,j),player);
+					numberOfNodesGenerated++;
 					node.addChild(n);
 					if(n.isTerminalNode(player))
 					{
@@ -75,6 +86,7 @@ public class MinMaxSearch {
 					char [][] newState = deepCopy(state);
 					newState[i][j] = player.mark;
 					Node n = new Node(node,newState,new Move(i,j),player);
+					numberOfNodesGenerated++;
 					node.addChild(n);
 					if(n.isTerminalNode(player))
 					{

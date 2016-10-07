@@ -17,5 +17,8 @@ public abstract class Player {
 	public char getMark(){
 		return mark;
 	}
+	public abstract int getNumberOfNodesGenerated();
+	
+	public abstract void resetNumberOfNodesGenerated();
 	
 }

@@ -15,4 +15,14 @@ public class AdvancedPlayer extends Player {
 		return search.getOptimalMove(board);
 	}
 
+	@Override
+	public int getNumberOfNodesGenerated() {
+		return search.getNumberOfNodesGenerated();
+	}
+	
+	@Override
+	public void resetNumberOfNodesGenerated(){
+		search.resetNumberOfNodesGenerated();
+	}
+
 }

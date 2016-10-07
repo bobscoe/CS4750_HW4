@@ -37,4 +37,15 @@ public class BeginnerPlayer extends Player {
 	private boolean opponentHas2InARow(Board board){
 		return board.playerHasTwoInARow(this.opponent);
 	}
+
+	@Override
+	public int getNumberOfNodesGenerated() {
+		return 0;
+	}
+
+	@Override
+	public void resetNumberOfNodesGenerated() {
+		// TODO Auto-generated method stub
+		
+	}
 }

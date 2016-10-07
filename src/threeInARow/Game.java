@@ -17,11 +17,17 @@ public class Game {
 	}
 	
 	public void start(){
+		
 		while(!gameBoard.isDraw()){
 			try{
 			player1.isMax = true;
 			player2.isMax = false;
+			long startTime = System.currentTimeMillis();
 			Move move = player1.getMove(gameBoard);
+			long stopTime = System.currentTimeMillis();
+			System.out.println("Execution time for move ("+move.Row+","+move.Column+") in milli seconds:"+ (stopTime - startTime));
+			System.out.println("Number of nodes generated:" + player1.getNumberOfNodesGenerated());
+			player1.resetNumberOfNodesGenerated();
 			gameBoard.markMove(player1,move);
 			gameBoard.printState();
 			if(gameBoard.isComplete(player1)){
@@ -31,7 +37,12 @@ public class Game {
 			
 			player1.isMax = false;
 			player2.isMax = true;
+			startTime = System.currentTimeMillis();
 			move = player2.getMove(gameBoard);
+			stopTime = System.currentTimeMillis();
+			System.out.println("Execution time for move ("+move.Row+","+move.Column+") in milli seconds:"+ (stopTime - startTime));
+			System.out.println("Number of nodes generated:" + player2.getNumberOfNodesGenerated());
+			player2.resetNumberOfNodesGenerated();
 			gameBoard.markMove(player2,move);
 			gameBoard.printState();
 			if(gameBoard.isComplete(player2)){
@@ -46,9 +57,6 @@ public class Game {
 		}
 	}
 	
-	public boolean isCompleted(){
-		return false;
-	}
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		

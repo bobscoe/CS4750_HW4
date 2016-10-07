@@ -32,4 +32,14 @@ public class HumanPlayer extends Player {
 		return new Move(Integer.parseInt(rowColumn[0]), Integer.parseInt(rowColumn[1]));
 	}
 
+	@Override
+	public int getNumberOfNodesGenerated() {
+		return 0;
+	}
+
+	@Override
+	public void resetNumberOfNodesGenerated() {
+		
+	}
+
 }
